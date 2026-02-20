@@ -1,36 +1,61 @@
-// Write custom JavaScript here.
+function renderCommentComponent(
+    targetId,
+    labelText,
+    isError = false,
+    isDisabled = false,
+) {
+    const container = document.getElementById(targetId);
 
-// You may ignore this file and delete if if JavaScript is not required for your challenge.
-// para empezar declase tres variables que me traen el ide de todo el formulario, input y lista
-const formulario = document.getElementById("todo-form");
-const inputTarea = document.getElementById("todo-input");
-const listaTareas = document.getElementById("todo-list");
+    const wrapper = document.createElement("div");
+    wrapper.className = "caja-comentarios";
 
-// . llame la variable del formulario en la cual le estoy diciendo que es de tipi submit y que tiene un evento y a el formulario le vamos a eliminar el evento que trae por defecto
-formulario.addEventListener("submit", function (event) {
-    event.preventDefault();
+    wrapper.innerHTML = `
+        <label class="descripcion">${labelText}</label>
+        <textarea maxlength="500" placeholder="Enter a description..."></textarea>
+        <div class="contadores">
+            <span class="error-mensaje"></span>
+            <span class="contador">0/500</span>
+        </div>
+    `;
 
-    // cree una nueva constante que es para la creacion de las nuevas tareas que se van a ingresar mediante el inputTarea y va a eliminar los espacios que el usuairo agregue a el inicio por defecto
-    const textoTarea = inputTarea.value.trim();
+    container.appendChild(wrapper);
 
-    // cree un condicional donde si el infut esta vacio muestre una alerta de que no se puede enviar la lista vacia, si la lista no esta vacia se
-    if (textoTarea === "") {
-        alert("no puedes enviar la lista vacia ");
-        // se va generar una nueva tarea con un boton de eliminar y cuando el usuairo haga click se elimine lo que quiero eliminar de la lista
-    } else {
-        const nuevaTarea = document.createElement("li");
-        nuevaTarea.textContent = textoTarea;
+    const textarea = wrapper.querySelector("textarea");
+    const errorMsg = wrapper.querySelector(".error-mensaje");
+    const counter = wrapper.querySelector(".contador");
 
-        const botonEliminar = document.createElement("button");
-        botonEliminar.textContent = "eliminar";
-
-        botonEliminar.addEventListener("click", function () {
-            nuevaTarea.remove(botonEliminar);
-        });
-
-        listaTareas.appendChild(nuevaTarea);
-        nuevaTarea.appendChild(botonEliminar);
-        // y por ultimo vuelvo a dejar el input vacio
-        inputTarea.value = "";
+    // Estado inicial de error
+    if (isError) {
+        textarea.classList.add("error");
+        errorMsg.textContent = "This field is required";
     }
-});
+
+    // Estado bloqueado (disabled)
+    if (isDisabled) {
+        textarea.disabled = true;
+    }
+
+    textarea.addEventListener("input", () => {
+        const length = textarea.value.length;
+        counter.textContent = `${length}/500`;
+
+        if (length === 0) {
+            errorMsg.textContent = "This field is required";
+            textarea.classList.add("error");
+            counter.classList.remove("error");
+        } else if (length === 500) {
+            errorMsg.textContent = "limite alcanzado";
+            textarea.classList.add("error");
+            counter.classList.add("error");
+        } else {
+            errorMsg.textContent = "";
+            textarea.classList.remove("error");
+            counter.classList.remove("error");
+        }
+    });
+}
+
+// Configuración de las 3 instancias
+renderCommentComponent("input-container", "Description 1");
+renderCommentComponent("input-container", "Description 2", true);
+renderCommentComponent("input-container", "Description 3", false, true);
