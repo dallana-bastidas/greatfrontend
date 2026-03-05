@@ -13,7 +13,7 @@ tabs.forEach((tab) => {
             t.setAttribute("aria-selected", "false");
 
             t.classList.remove("border-indigo-600", "text-indigo-600");
-            // Ponemos el color inactivo que ya tenías
+
             t.classList.add("border-transparent", "text-gray-500");
         });
 
