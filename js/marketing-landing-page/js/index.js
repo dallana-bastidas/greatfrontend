@@ -11,16 +11,12 @@ const btnHeader = [
 
 const btnFooter = [
     {
-        text: "Monthly",
-        class: "",
+        text: "Monthly ",
+        class: " rounded-md p-2 text-black hover:bg-gray-300 border-2 border-gray-200 w-28",
     },
     {
         text: "Annually",
-        class: "",
-    },
-    {
-        text: "Buy now",
-        class: "",
+        class: "rounded-md p-2 text-black hover:bg-gray-300 border-2 border-gray-200 w-28",
     },
 ];
 
@@ -44,6 +40,7 @@ function crearBotones(listaDeBotones = [], idDestino) {
 
 crearBotones(btnHeader, "btnNav");
 crearBotones(btnHeader, "pachulin");
+crearBotones(btnFooter, "btnMes");
 
 const LOGO_DATA = [
     { src: "img/instagram.jpg", alt: "Instagram" },
