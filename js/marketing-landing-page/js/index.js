@@ -70,6 +70,39 @@ const precios = [
     },
 ];
 
+const infoTexto = [
+    {
+        titulo: "What types of images are available on your platform?",
+        informacion:
+            "Our platform offers a diverse range of abstract images to suit various preferences and needs. From vibrant geometric patterns to soothing landscapes, we strive to provide a wide selection to cater to different tastes. ",
+    },
+    {
+        titulo: "How can I access and download images from your platform?",
+        informacion:
+            "Accessing and downloading images from our platform is simple. Upon signing up and logging in, users can browse through our curated collection and download their chosen images directly to their devices with just a few clicks.",
+    },
+    {
+        titulo: "Do you offer free images, or is there a subscription required?",
+        informacion:
+            "We provide both free and premium images on our platform. Users can explore a selection of free images without any subscription. For access to our entire library and additional features, we offer subscription plans tailored to different user needs.",
+    },
+    {
+        titulo: "What payment methods do you accept for subscriptions?",
+        informacion:
+            "We accept a variety of payment methods, including credit/debit cards and online payment gateways, to make the subscription process convenient for our users.",
+    },
+    {
+        titulo: "Can I cancel or modify my subscription at any time?",
+        informacion:
+            "Yes, absolutely. You have the flexibility to cancel or modify your subscription at any time through your account settings. Changes will take effect immediately, ensuring you have full control over your subscription preferences.",
+    },
+    {
+        titulo: "How frequently do you update your image collection?",
+        informacion:
+            "We regularly update our image collection with fresh and captivating content to keep our users inspired and engaged. New images are added consistently to ensure there's always something new to discover on our platform.",
+    },
+];
+
 function crearBotones(listaDeBotones = [], idDestino) {
     const contenedor = document.getElementById(idDestino);
 
@@ -156,7 +189,6 @@ window.addEventListener("load", () => {
 function crearCard(datos) {
     const cartaCreada = document.getElementById("ventas");
 
-    // Si cartaCreada es null, el JS fallará. Asegúrate de que el ID exista en tu HTML.
     if (!cartaCreada) return;
 
     const listaDeTarjetas = datos.map((plan) => {
@@ -173,7 +205,7 @@ function crearCard(datos) {
 
                 <div class="flex items-baseline gap-1">
                     <p class="font-bold text-3xl ${plan.popularidad ? "text-purple-700" : "text-black"}">${plan.precio}</p>
-                    <p class="text-gray-500">${plan.frecuencia}</p>
+                    <p class="${plan.popularidad ? "text-purple-700" : "text-black"}">${plan.frecuencia}</p>
                 </div>
 
                 <p class="text-gray-500 text-xs mb-6">${plan.description}</p>
@@ -202,3 +234,23 @@ function crearCard(datos) {
 }
 
 crearCard(precios);
+
+function newInfo(parrafo) {
+    const nuevaInformacion = document.getElementById("parrafos");
+
+    const listaDeParrafo = parrafo.map((texto) => {
+        return `
+        <div class= " m-10 p-5 space-y-2 flex-grow  border-2 border- border-b-gray-500">
+        <span class=" flex items-center justify-center bg-gray-300 text-purple-700 rounded-full w-8 h-8 text-xs">-</span>
+        <p class= "text-sm"> ${texto.titulo}</p>
+        <p class= "text-sm text-gray-600 "> ${texto.informacion}</p>
+
+        </div>
+
+        `;
+    });
+
+    nuevaInformacion.innerHTML = listaDeParrafo.join("");
+}
+
+newInfo(infoTexto);
