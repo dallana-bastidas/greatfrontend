@@ -20,6 +20,56 @@ const btnFooter = [
     },
 ];
 
+const precios = [
+    {
+        titulo: "Basic Plan ",
+        text: "Access to a cureated selection of abstract images",
+        precio: "$9.99",
+        popularidad: false,
+        frecuencia: "/month",
+        description: "Billed monthly",
+        opciones: [
+            "Standard quality images",
+            "Limited to personal use",
+            "Email support",
+        ],
+        boton: "Buy Now",
+    },
+
+    {
+        titulo: "Standard Plan ",
+        text: "Next-level Integrations, priced economically",
+        precio: "$19.99",
+        popularidad: true,
+        frecuencia: "/month",
+        description: "Billed monthly",
+        opciones: [
+            "Expanded librart with more diverse abstract images",
+            "High-resolution images avaliable ",
+            "Priority email support",
+        ],
+        boton: "Buy Now",
+    },
+
+    {
+        titulo: "Premium Plan",
+        text: "Experience limitless living for porwer users ",
+        precio: "$29.99",
+        popularidad: false,
+        frecuencia: "/month",
+        description: "Billed monthly",
+        opciones: [
+            "Full access to the entire image libary,including exclusive content",
+            "Highest quality images, incliding premium collections",
+            "Commercial and resale rights",
+            "Dedicated customer support line",
+            "24/7 support responsive time ",
+            "Advanced analytics and insights ",
+        ],
+        boton: "Buy Now",
+    },
+];
+
 function crearBotones(listaDeBotones = [], idDestino) {
     const contenedor = document.getElementById(idDestino);
 
@@ -102,3 +152,33 @@ window.addEventListener("load", () => {
     crearBotones(btnHeader, "pachulin");
     buildLogoSliderComponent();
 });
+
+function crearCard(datos) {
+    const cartaCreada = document.getElementById("ventas");
+
+    const listaDeTarjetas = datos.map((plan) => {
+        return `
+                <div class="card ${plan.popularidad ? "border-purple-800" : "border-gray-700"}">
+                <h1 class="border-gray-500">${plan.titulo} </h1>
+                 <p>${plan.popularidad === true ? "Most Popular" : " "}</p>
+                <p>${plan.text} </p>
+                <p>${plan.precio} </p>
+                <p>${plan.frecuencia} </p>
+                <p>${plan.description}</p>
+                <div>${plan.opciones
+                    .map(
+                        (opcion) => `
+                        <div class="flex items-center">
+                            ${opcion}
+                        </div>
+                    `,
+                    )
+                    .join("")}																				 </div>
+
+                <button class="bg-purple-800 text-white">${plan.boton}</button>
+                    </div>
+            `;
+    });
+    cartaCreada.innerHTML = listaDeTarjetas.join("");
+}
+crearCard(precios);
