@@ -158,14 +158,15 @@ function crearCard(datos) {
 
     const listaDeTarjetas = datos.map((plan) => {
         return `
-                <div class="card ${plan.popularidad ? "border-purple-800" : "border-gray-700"}">
-                <h1 class="border-gray-500">${plan.titulo} </h1>
-                 <p>${plan.popularidad === true ? "Most Popular" : " "}</p>
-                <p>${plan.text} </p>
-                <p>${plan.precio} </p>
+                <div class="m-16 card ${plan.popularidad ? "border-purple-800 h-60" : "border-gray-700"}">
+                 <p class="text-purple-700 text-center">${plan.popularidad === true ? "Most Popular" : " "}</p>
+                <h1 class="font-bold text-2xl">${plan.titulo} </h1>
+
+                <p class="text-gray-600 text-sm">${plan.text} </p>
+                <p class="font-bold text-2xl">${plan.precio} </p>
                 <p>${plan.frecuencia} </p>
-                <p>${plan.description}</p>
-                <div>${plan.opciones
+                <p class="text-gray-600 text-sm">${plan.description}</p>
+                <div class="text-gray-600">${plan.opciones
                     .map(
                         (opcion) => `
                         <div class="flex items-center">
@@ -173,9 +174,10 @@ function crearCard(datos) {
                         </div>
                     `,
                     )
-                    .join("")}																				 </div>
+                    .join("")}
+                </div>
 
-                <button class="bg-purple-800 text-white">${plan.boton}</button>
+                <button class="${plan.popularidad ? "bg-purple-800" : "text-red-900 w-24"} ">${plan.boton}</button>
                     </div>
             `;
     });
