@@ -156,31 +156,49 @@ window.addEventListener("load", () => {
 function crearCard(datos) {
     const cartaCreada = document.getElementById("ventas");
 
+    // Si cartaCreada es null, el JS fallará. Asegúrate de que el ID exista en tu HTML.
+    if (!cartaCreada) return;
+
     const listaDeTarjetas = datos.map((plan) => {
         return `
-                <div class="m-16 card ${plan.popularidad ? "border-purple-800 h-60" : "border-gray-700"}">
-                 <p class="text-purple-700 text-center">${plan.popularidad === true ? "Most Popular" : " "}</p>
-                <h1 class="font-bold text-2xl">${plan.titulo} </h1>
+            <div class=" mt-16 card border-2 border-solid  w-80 flex flex-col justify-between p-6 rounded-xl ${plan.popularidad ? "border-purple-600" : "border-gray-500"}">
 
-                <p class="text-gray-600 text-sm">${plan.text} </p>
-                <p class="font-bold text-2xl">${plan.precio} </p>
-                <p>${plan.frecuencia} </p>
-                <p class="text-gray-600 text-sm">${plan.description}</p>
-                <div class="text-gray-600">${plan.opciones
-                    .map(
-                        (opcion) => `
-                        <div class="flex items-center">
-                            ${opcion}
-                        </div>
-                    `,
-                    )
-                    .join("")}
+                <p class="text-purple-700 text-center font-bold">
+                    ${plan.popularidad ? "Most Popular" : "&nbsp;"}
+                </p>
+
+                <h1 class="font-bold text-2xl">${plan.titulo}</h1>
+
+                <p class="text-gray-600 text-sm mb-4">${plan.text}</p>
+
+                <div class="flex items-baseline gap-1">
+                    <p class="font-bold text-3xl ${plan.popularidad ? "text-purple-700" : "text-black"}">${plan.precio}</p>
+                    <p class="text-gray-500">${plan.frecuencia}</p>
                 </div>
 
-                <button class="${plan.popularidad ? "bg-purple-800" : "text-red-900 w-24"} ">${plan.boton}</button>
-                    </div>
-            `;
+                <p class="text-gray-500 text-xs mb-6">${plan.description}</p>
+
+                <div class="text-gray-600 space-y-3 flex-grow">
+                    ${plan.opciones
+                        .map(
+                            (opcion) => `
+                        <div class="flex items-center gap-2">
+                            <span class="flex items-center justify-center bg-purple-100 text-purple-700 rounded-full w-5 h-5 text-xs">✔️</span>
+                            <span>${opcion}</span>
+                        </div>
+                    `,
+                        )
+                        .join("")}
+                </div>
+
+                <button class="mt-8 py-3 px-6 rounded-lg font-semibold transition-colors ${plan.popularidad ? "bg-purple-700 hover:bg-purple-300 text-white w-full " : "bg-gray-100 hover:bg-gray-200  text-black w-full border border-gray-300"}">
+                    ${plan.boton}
+                </button>
+            </div>
+        `;
     });
+
     cartaCreada.innerHTML = listaDeTarjetas.join("");
 }
+
 crearCard(precios);
