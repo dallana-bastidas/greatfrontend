@@ -274,3 +274,5 @@ function newInfo(parrafo) {
 }
 
 newInfo(infoTexto);
+
+///terminado wuw
