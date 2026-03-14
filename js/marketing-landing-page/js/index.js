@@ -238,12 +238,32 @@ crearCard(precios);
 function newInfo(parrafo) {
     const nuevaInformacion = document.getElementById("parrafos");
 
+    const ocultarInfo = (event) => {
+        const botonPulsado = event.target;
+        if (botonPulsado.tagName !== "BUTTON") return;
+
+        const tarjeta = botonPulsado.closest(".solucion");
+
+        const parrafoAcondicionar = tarjeta.querySelector(".infoDetallada");
+
+        parrafoAcondicionar.classList.toggle("hidden");
+    };
+
+    nuevaInformacion.addEventListener("click", ocultarInfo);
+
     const listaDeParrafo = parrafo.map((texto) => {
         return `
-        <div class= " m-10 p-5 space-y-2 flex-grow  border-2 border- border-b-gray-500">
-        <span class=" flex items-center justify-center bg-gray-300 text-purple-700 rounded-full w-8 h-8 text-xs">-</span>
+        <div class= "solucion m-10 p-5 space-y-2 flex-grow  border-2 border- border-b-gray-500">
+
+        <div class="flex justify-between">
         <p class= "text-sm"> ${texto.titulo}</p>
-        <p class= "text-sm text-gray-600 "> ${texto.informacion}</p>
+        <button class=" flex items-center justify-center bg-gray-300 text-purple-700 rounded-full w-8 h-8 text-xs">-</button>
+
+        </div>
+
+
+
+        <p class= "infoDetallada text-sm text-gray-600 "> ${texto.informacion}</p>
 
         </div>
 
