@@ -16,8 +16,14 @@ function crearCard(infoApi) {
         const newSpan = document.createElement("span");
         const newTitulo = document.createElement("span");
 
+        const nombre = {
+            library_images: "library in images",
+            paid_users: "paid users",
+            downloads: "downloads",
+        };
+
         newSpan.textContent = spanInfo.value.toLocaleString();
-        newTitulo.textContent = spanInfo.metric;
+        newTitulo.textContent = nombre[spanInfo.metric];
 
         newDiv.appendChild(newSpan);
         newDiv.appendChild(newTitulo);
@@ -25,11 +31,9 @@ function crearCard(infoApi) {
         newDiv.classList.add(
             "border-2",
             "border-gray-200",
-            "h-24",
-            "w-96",
-            "mt-6",
             "rounded-md",
             "flex",
+            "flex-1",
             "flex-col",
             "justify-center",
             "items-center",
@@ -38,7 +42,11 @@ function crearCard(infoApi) {
 
         newSpan.classList.add("text-4xl", "font-bold", "text-indigo-700");
 
-        newTitulo.classList.add("text-sm", "text-gray-500");
+        newTitulo.classList.add(
+            "text-sm",
+            "text-gray-500",
+            "first-letter:uppercase",
+        );
 
         info.appendChild(newDiv);
     });

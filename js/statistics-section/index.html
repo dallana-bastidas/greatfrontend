@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-    <!-- [Delete this comment] This file is the main file for the challenge. For the most part, you should be editing this file. -->
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,34 +11,31 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="css/style.css" />
-
-        <!-- Tailwind CDN allows you to use Tailwind classes immediately in your HTML without any installation steps.
-      If you're not using Tailwind, you may delete the <script> -->
-        <!-- Get started on Tailwind: https://tailwindcss.com/docs/installation/play-cdn -->
         <script src="https://cdn.tailwindcss.com"></script>
 
         <link rel="icon" href="img/favicon.ico" sizes="any" />
-        <style>
-            /* You may write styles inside this <style> tag or within `css/style.css`. */
-        </style>
+        <style></style>
     </head>
-    <body class="bg-gray-100">
-        <div class="text-center m-16">
-            <p class="text-xs text-indigo-700 font-bold mt-8">Statistics</p>
-            <h1 class="text-4xl font-bold mt-3">
+    <body class="bg-gray-100 px-6 py-24 max-w-[1440px] mx-auto">
+        <div class="text-center">
+            <p class="text-xs text-indigo-700 font-bold">Statistics</p>
+            <h1 class="text-4xl font-bold mt-3 text-pretty">
                 More than premium abstract imagery
             </h1>
-            <p class="text-neutral-600 mt-4">
+            <p class="text-neutral-600 mt-4 mb-8">
                 Our platform is more than as a service to us - it is a catalyst
                 for enriching lives through premium abstract imagery
             </p>
         </div>
 
-        <div class="flex justify-center mx-16">
-            <img src="img/white-blocks.png" class="w-96" alt="" />
-            <div class="ml-7">
+        <div class="flex flex-col md:flex-row flex-1 gap-8">
+            <div class="flex-1">
+                <img src="img/white-blocks.png" class="w-full" alt="" />
+            </div>
+
+            <div class="flex flex-1 flex-col gap-4">
                 <p class="text-sm text-gray-700">Our mission, in numbers</p>
-                <div id="contenedor" class=""></div>
+                <div id="contenedor" class="flex flex-col flex-1 gap-8"></div>
             </div>
         </div>
 
