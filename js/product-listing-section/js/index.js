@@ -1,41 +1,52 @@
-const botones = [
-    {
-        text: "filter",
-        class: "",
-    },
-    {
-        text: "Sort by",
-        class: "",
-    },
-];
+async function obtenerInfo() {
+    const url = new URL(
+        "https://www.greatfrontend.com/api/projects/challenges/e-commerce/products",
+    );
+    url.searchParams.set("per_page", "2");
 
-const api = [
-    "products.json",
-    "product-reviews.json",
-    "product-info.json",
-    "product-imagenes.json",
-    "inventory.json",
-    "collections.json",
-    "categories.json",
-];
-
-async function obtenerInformacion() {
     try {
-        const responses = await Promise.all(
-            api.map((recore) => fetch(`./data/${recore}`)),
-        );
+        const response = await fetch(url);
 
-        const data = await Promise.all(
-            responses.map(async (res) => {
-                if (!res.ok) {
-                    throw new Error(`failed to load ${res.url}`);
-                }
-                return res.json();
-            }),
-        );
+        if (!response.ok) {
+            throw new Error(`Error HTTP detectado: ${response.status}`);
+        }
 
-        return data;
+        const data = await response.json();
+
+        crearCard(data.data);
     } catch (error) {
-        console.error(error);
+        console.error("No se pudo obtener la información:", error.message);
     }
 }
+
+function crearCard(productos) {
+    const contenedor = document.getElementById("contenedorProductos");
+
+    contenedor.innerHTML = "";
+
+    productos.forEach((producto) => {
+        console.log("Estructura del producto:", producto);
+        const cardHTML = `
+            <div class="card">
+
+            <div>
+            <img src="${producto.images[0].image_url}" class="size-64"/>
+            </div>
+            <p> </p>
+
+                <h3>${producto.name}</h3>
+                <span>$${producto.priceRange.highest}</span>
+                ${producto.colors
+                    .map((color) => {
+                        return `<span class="inline-block size-6 bg-${color}-500 bg-${color} rounded-full border"></span>`;
+                    })
+                    .join("")}
+
+            </div>
+        `;
+
+        contenedor.innerHTML += cardHTML;
+    });
+}
+
+obtenerInfo();
