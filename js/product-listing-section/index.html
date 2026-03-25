@@ -25,11 +25,29 @@
     </head>
     <body class="bg-gray-200">
         <div>
-            <div
-                id="contenedorProductos"
-                class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            ></div>
+            <div class="flex justify-between space-x bg-white">
+                <button
+                    type="button"
+                    class="w-20 h-12 m-6 border-2 border-gray-200"
+                >
+                    Filter
+                </button>
+                <button
+                    type="button"
+                    class="w-20 h-12 m-6 border-2 border-gray-200"
+                >
+                    Sort By
+                </button>
+            </div>
+
+            <div>
+                <div
+                    id="contenedorProductos"
+                    class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                ></div>
+            </div>
         </div>
+
         <script src="js/index.js"></script>
     </body>
 </html>
