@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-    <!-- [Delete this comment] This file is the main file for the challenge. For the most part, you should be editing this file. -->
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,20 +12,16 @@
         />
         <link rel="stylesheet" href="css/style.css" />
 
-        <!-- Tailwind CDN allows you to use Tailwind classes immediately in your HTML without any installation steps.
-      If you're not using Tailwind, you may delete the <script> -->
-        <!-- Get started on Tailwind: https://tailwindcss.com/docs/installation/play-cdn -->
         <script src="https://cdn.tailwindcss.com"></script>
 
         <link rel="icon" href="img/favicon.ico" sizes="any" />
-        <style>
-            /* You may write styles inside this <style> tag or within `css/style.css`. */
-        </style>
+        <style src="index.css"></style>
     </head>
     <body class="bg-gray-200">
         <div>
             <div class="flex justify-between space-x bg-white">
                 <button
+                    id="btn-filtrar"
                     type="button"
                     class="w-20 h-12 m-6 border-2 border-gray-200"
                 >
@@ -40,7 +35,141 @@
                 </button>
             </div>
 
-            <div>
+            <div class="flex overflow-auto">
+                <!--fixed me permite que ocupe todo el espacio -->
+                <div
+                    id="filtrar"
+                    class="hidden fixed top-0 left-0 h-full w-full z-50 bg-white overflow-y-auto p-6 flex flex-col border-r md:relative md:inset-auto md:z-0 md:h-screen md:w-80"
+                >
+                    <div class="flex justify-between items-center mb-8 pb-4">
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            Filters
+                        </h2>
+                        <button
+                            id="btn-cerrar"
+                            type="button"
+                            class="text-4xl font-light text-gray-500"
+                        >
+                            x
+                        </button>
+                    </div>
+                    <div class="space-y-10">
+                        <div id="filtrarCollections" class="">
+                            <h3 class="text-lg font-semibold mb-4">
+                                Collections
+                            </h3>
+                            <div class="flex flex-col gap-3">
+                                <button
+                                    data-collection="fresh"
+                                    type="button"
+                                    class="text-left text-gray-600 hover:text-black"
+                                >
+                                    Latest arrivals
+                                </button>
+                                <button
+                                    data-collection="urban"
+                                    type="button"
+                                    class="text-left text-gray-600 hover:text-black"
+                                >
+                                    Urban Oasis
+                                </button>
+                                <button
+                                    data-collection="cozy"
+                                    type="button"
+                                    class="text-left text-gray-600 hover:text-black"
+                                >
+                                    Cozy Comfort
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="filtroCategoria" class="flex flex-col gap-3">
+                            <h3 class="text-lg font-semibold mb-4">
+                                Categoria
+                            </h3>
+                            <button
+                                data-categoria="unisex"
+                                type="button"
+                                class="text-left text-gray-600 hover:text-black"
+                            >
+                                Unisex
+                            </button>
+                            <button
+                                data-categoria="women"
+                                type="button"
+                                class="text-left text-gray-600 hover:text-black"
+                            >
+                                Women
+                            </button>
+                            <button
+                                data-categoria="men"
+                                type="button"
+                                class="text-left text-gray-600 hover:text-black"
+                            >
+                                Men
+                            </button>
+                        </div>
+
+                        <div id="filtro-colores">
+                            <h3 class="text-lg font-semibold mb-4">Colors</h3>
+                            <span
+                                data-color="white"
+                                class="inline-block size-6 bg-white rounded-full border cursor-pointer"
+                            >
+                            </span>
+                            <span
+                                data-color="black"
+                                class="inline-block size-6 bg-black rounded-full border cursor-pointer"
+                            >
+                            </span>
+                            <span
+                                data-color="red"
+                                class="inline-block size-6 bg-red-600 rounded-full border cursor-pointer"
+                            >
+                            </span>
+                            <span
+                                data-color="orange"
+                                class="inline-block size-6 bg-orange-400 rounded-full border cursor-pointer"
+                            >
+                            </span>
+                            <span
+                                data-color="yellow"
+                                class="inline-block size-6 bg-yellow-500 rounded-full border cursor-pointer"
+                            >
+                            </span>
+                            <span
+                                data-color="green"
+                                class="inline-block size-6 bg-green-500 rounded-full border cursor-pointer"
+                            >
+                            </span>
+                            <span
+                                data-color="purple"
+                                class="inline-block size-6 bg-purple-500 rounded-full border cursor-pointer"
+                            >
+                            </span>
+                            <span
+                                data-color="brown"
+                                class="inline-block size-6 bg-amber-900 rounded-full border cursor-pointer"
+                            >
+                            </span>
+                            <span
+                                data-color="beige"
+                                class="inline-block size-6 bg-amber-50 rounded-full border cursor-pointer"
+                            >
+                            </span>
+                            <span
+                                data-color="pink"
+                                class="inline-block size-6 bg-pink-200 rounded-full border cursor-pointer"
+                            >
+                            </span>
+                        </div>
+
+                        <div id="estrellas">
+                            <h3>Rating</h3>
+                        </div>
+                    </div>
+                </div>
+
                 <div
                     id="contenedorProductos"
                     class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
