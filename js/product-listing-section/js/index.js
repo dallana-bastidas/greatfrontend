@@ -1,11 +1,13 @@
 let todosLosProductos = [];
+let coloresSeleccionados = [];
 
-// coxion a la base de datos
+// coneccion a la base de datos
 async function obtenerInfo() {
     const url = new URL(
         "https://www.greatfrontend.com/api/projects/challenges/e-commerce/products",
     );
-    url.searchParams.set("per_page", "8");
+    url.searchParams.set("per_page", "9");
+
     //   url.searchParams.append("color", "black");
     //  url.searchParams.append("color", "pink");
 
@@ -125,12 +127,30 @@ filtroColores.addEventListener("click", (event) => {
 
     const colorSeleccionado = target.dataset.color;
 
-    // Filtramos sobre el array que ya tenemos en memoria
-    const productosFiltrados = todosLosProductos.filter((p) =>
-        p.colors.includes(colorSeleccionado),
-    );
+    // Toggle: agregar si no existe y  eliminar si ya existe
+    // includes sirve como vigilante el en este caso esta preguntado si el color ya esta seleccionado, verifica el estado
+    // filter crea un array
+    if (coloresSeleccionados.includes(colorSeleccionado)) {
+        coloresSeleccionados = coloresSeleccionados.filter(
+            (c) => c !== colorSeleccionado,
+        );
+    } else {
+        coloresSeleccionados.push(colorSeleccionado);
+    }
+
+    // Lógica de filtrado multi-color
+    const productosFiltrados = todosLosProductos.filter((p) => {
+        // Si no hay filtros, mostrar todo
+        if (coloresSeleccionados.length === 0) return true;
+
+        // Verifica si al menos uno de los colores del producto coincide con la selección
+        return p.colors.some((colorProducto) =>
+            coloresSeleccionados.includes(colorProducto),
+        );
+    });
 
     renderizarProductos(productosFiltrados);
+
     filtrarSeccion.classList.add("hidden");
 });
 
