@@ -1,18 +1,17 @@
 let todosLosProductos = [];
 let coloresSeleccionados = [];
+let currentPage = 1;
+let hasMore = false;
 
 // coneccion a la base de datos
-async function obtenerInfo() {
+async function obtenerInfo(page = 1) {
     const url = new URL(
         "https://www.greatfrontend.com/api/projects/challenges/e-commerce/products",
     );
-    url.searchParams.set("per_page", "9");
 
-    //   url.searchParams.append("color", "black");
-    //  url.searchParams.append("color", "pink");
-
-    // https://www.greatfrontend.com/api/projects/challenges/e-commerce/products?per_page=20&color=black&color=pink
-    // color=black&color=pink
+    url.searchParams.set("per_page", "2");
+    url.searchParams.set("page", page.toString());
+    //url.searchParams.set("page", "1");
 
     try {
         const response = await fetch(url);
@@ -20,6 +19,8 @@ async function obtenerInfo() {
         const json = await response.json();
 
         todosLosProductos = json.data;
+        currentPage = json.pagination.page;
+        hasMore = json.pagination.has_more;
         renderizarProductos(todosLosProductos);
     } catch (error) {
         console.log("fallo en fetch:", error.message);
@@ -31,6 +32,28 @@ const filtrarSeccion = document.getElementById("filtrar");
 const filtrarColeccion = document.getElementById("filtrarCollections");
 const filtrarCategorias = document.getElementById("filtroCategoria");
 const filtroColores = document.getElementById("filtro-colores");
+const contenedorDepaginacion = document.getElementById("paginacion");
+const btnAnterior = document.getElementById("btn-anterior");
+const btnSiguiente = document.getElementById("btn-siguiente");
+
+//logica de paginacion
+contenedorDepaginacion.addEventListener("click", (event) => {
+    const target = event.target;
+
+    if (target.id === "btn-anterior" && currentPage > 1) {
+        currentPage--;
+        obtenerInfo(currentPage);
+    }
+
+    if (target.id === "btn-siguiente" && hasMore) {
+        currentPage++;
+        obtenerInfo(currentPage);
+    }
+    console.log(hasMore);
+    if (!hasMore) {
+        btnSiguiente.classList.add("cursor-not-allowed", "opacity-50");
+    }
+});
 
 // logica de la creancion de las card de los productos
 contenedor.addEventListener("click", (event) => {
@@ -154,4 +177,4 @@ filtroColores.addEventListener("click", (event) => {
     filtrarSeccion.classList.add("hidden");
 });
 
-obtenerInfo("color");
+obtenerInfo((page = 1));
