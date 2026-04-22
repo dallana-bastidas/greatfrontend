@@ -1,0 +1,60 @@
+body {
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Inter", system-ui, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-container {
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+    justify-content: center;
+    max-width: 384px;
+    width: 100%;
+    margin: 0;
+}
+
+.user-details {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.profile-pic {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.text-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-name {
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: #171717;
+    margin: 0;
+}
+
+.user-handle {
+    color: #525252;
+    font-size: 0.875rem;
+}
+
+.testimonial-text {
+    color: #525252;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+}
